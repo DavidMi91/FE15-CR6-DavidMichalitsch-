@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+.bg-light {
+    background: url('https://cdn.pixabay.com/photo/2020/03/21/02/26/pizza-4952508_960_720.jpg' )  no-repeat center center;
+    color: white;
+    background-size: cover;
+    height: 50vh;
+   }
+.bg-light .container{
+    position:relative;
+    top: 40%;
+}
+.bg-light .container h1{
+    font-family: 'Dancing Script', cursive;
+    font-size: 4em;
+}

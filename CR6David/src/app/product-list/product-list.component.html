@@ -1,0 +1,23 @@
+<h2 class="text-center">Our menu</h2>
+<div class="row justify-content-center row-cols-1 row-cols-md-2 row-cols-lg-4">
+<div class="col" *ngFor="let product of products ; index as productId">
+<div class="card" style="width: 80%;">
+  <img class="card-img-top" src="{{product.img}}" alt="Card image cap">
+  <div class="card-body">
+    <p class="card-title">{{ product.name }}</p>
+    <p class="card-text" *ngIf="product.description" >
+      {{ product.description }}
+    </p>
+    <hr>
+    <p class="card-title">{{ product.price | currency }}</p>
+    <hr>
+    <div *ngIf="product.available==true; else notAvailable">
+      <p><a class="btn btn-primary btn-lg"  routerLink="products/{{productId}}" role ="button">Details</a></p>
+      <p><a class="btn btn-success btn-lg" (click)="addToCart(productId)" role ="button">Order</a></p>
+
+    </div>
+    <ng-template #notAvailable><p class="card-text text-danger">Sorry, not available</p></ng-template>
+  </div>
+</div>
+</div>
+</div>
