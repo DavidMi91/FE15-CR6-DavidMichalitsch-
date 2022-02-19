@@ -12,7 +12,7 @@
     <p class="card-title">{{ product.price | currency }}</p>
     <hr>
     <div *ngIf="product.available==true; else notAvailable">
-      <p><a class="btn btn-primary btn-lg"  routerLink="products/{{productId}}" role ="button">Details</a></p>
+      <p><a class="btn btn-primary btn-lg"  routerLink="../products/{{productId}}" role ="button">Details</a></p>
       <p><a class="btn btn-success btn-lg" (click)="addToCart(productId)" role ="button">Order</a></p>
 
     </div>

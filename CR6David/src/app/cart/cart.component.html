@@ -21,19 +21,24 @@
   <div class="orderSummary g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
     <div>
       <h2>Order summary:</h2>
+      <hr>
       <p>Your total: {{ getTotal() | currency}}</p>
     </div>
     <div>
       <p>Service charge: {{ getServiceCharge() | currency}}</p>
     </div>
     <div *ngIf="getTotal() >= 40; else noDiscount">
-      <p> Discounted total (15% off on orders from €40): {{ getDiscountedTotal() | currency}}</p><br>
-      <p>Final amount: {{ getDiscountedTotal() | currency}} + {{ getServiceCharge() | currency}} = {{
+      <p> Discounted total (15% off on orders from €40): {{ getDiscountedTotal() | currency}}</p>
+      <hr>
+      <!-- {{ getDiscountedTotal() | currency}} + {{ getServiceCharge() | currency}} =  -->
+      <p class="finalAmount">Final amount (discounted total + service charge): {{
         getDiscountedTotalWithServiceCharge() | currency }}</p>
     </div>
     <ng-template #noDiscount>
       <div>
-        <p> Final amount: {{ getTotal() | currency}} + {{ getServiceCharge() | currency}} = {{
+        <hr>
+        <!-- {{ getTotal() | currency}} + {{ getServiceCharge() | currency}} =  -->
+        <p class="finalAmount"> Final amount (total + service charge): {{
           getTotalWithServiceCharge() | currency }}</p>
       </div>
     </ng-template>
