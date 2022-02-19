@@ -1,8 +1,24 @@
 
-<h2>Dish Details</h2>
+<h1 class="text-center">Dish Details</h1>
 
+<div class="cart-item ">
 
-<div *ngIf="product">
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+      <div class="col-auto">
+        <p class="card-img m-2"><img src="{{ product.img }}" height="100vh" alt="{{ product.img }}"> </p>
+      </div>
+      <div class="col p-4 d-flex flex-column position-static">
+        <h3 class="mb-0 fw-bold">{{ product.name }}</h3>
+        <p class="card-text mb-auto">{{ product.description }}</p>
+      </div>
+      <div class="col-auto p-4 d-flex flex-column">
+        <h2 class="card-text fw-bold">{{ product.price | currency }}</h2>
+      </div>
+    </div>
+    <a class="btn btn-success btn-lg" (click)="addToCart()">Order</a>
+  </div>
+
+<!-- <div *ngIf="product">
 
  <h3>{{ product.name }}</h3>
 
@@ -13,4 +29,4 @@
 
  <button (click)="addToCart()">Order</button>
 
-</div>
+</div> -->

@@ -1,46 +1,60 @@
+<!-- checks if min. 1 item is in the cart, if not, shows "your cart is empty" msg -->
+<div *ngIf="items.length > 0; else noCartShown">
 
- <h3>Cart</h3>
+  <h3>Cart - {{items.length}} items</h3>
+  <div class="cart-item " *ngFor="let item of items">
 
-
- <div class="cart-item" *ngFor="let item of items">
- 
-  <span>{{ item.name }} </span>
- 
-  <span> {{ item.price | currency }}</span>
- 
- </div>
- 
- 
- <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
- 
- 
-  <div>
- 
-    <label for="name">
- 
-      Name
- 
-    </label>
- 
-    <input id="name" type="text" formControlName="name">
- 
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+      <div class="col-auto">
+        <p class="card-img m-2"><img src="{{ item.img }}" height="100vh" alt="{{ item.img }}"> </p>
+      </div>
+      <div class="col p-4 d-flex flex-column position-static">
+        <h3 class="mb-0 fw-bold">{{ item.name }}</h3>
+        <p class="card-text mb-auto">{{ item.description }}</p>
+      </div>
+      <div class="col-auto p-4 d-flex flex-column">
+        <h2 class="card-text fw-bold">{{ item.price | currency }}</h2>
+      </div>
+    </div>
   </div>
- 
- 
-  <div>
- 
-    <label for="address">
- 
-      Address
- 
-    </label>
- 
-    <input id="address" type="text" formControlName="address">
- 
+  <!-- if min. 1 item is in the cart, order summary is shown, otherwise not-->
+  <div class="orderSummary g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+    <div>
+      <h2>Order summary:</h2>
+      <p>Your total: {{ getTotal() | currency}}</p>
+    </div>
+    <div>
+      <p>Service charge: {{ getServiceCharge() | currency}}</p>
+    </div>
+    <div *ngIf="getTotal() >= 40; else noDiscount">
+      <p> Discounted total (15% off on orders from €40): {{ getDiscountedTotal() | currency}}</p><br>
+      <p>Final amount: {{ getDiscountedTotal() | currency}} + {{ getServiceCharge() | currency}} = {{
+        getDiscountedTotalWithServiceCharge() | currency }}</p>
+    </div>
+    <ng-template #noDiscount>
+      <div>
+        <p> Final amount: {{ getTotal() | currency}} + {{ getServiceCharge() | currency}} = {{
+          getTotalWithServiceCharge() | currency }}</p>
+      </div>
+    </ng-template>
   </div>
- 
- 
-  <button class="button" type="submit">Purchase</button>
- 
- 
- </form>
+  <form class="orderForm" [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label class="form-label" for="name">
+        Name
+      </label>
+      <input class="form-control" id="name" type="text" formControlName="name">
+    </div>
+    <div>
+      <label class="form-label" for="address">
+        Address
+      </label>
+      <input class="form-control" id="address" type="text" formControlName="address">
+    </div>
+    <button class="button btn-success mt-3 mb-5" type="submit">Order</button>
+  </form>
+</div>
+<!-- if cart is empty  -->
+<div><ng-template #noCartShown>
+  <h2 class="text-center mt-5">Your cart is empty :)</h2>
+</ng-template></div>
